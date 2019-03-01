@@ -5,10 +5,6 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
 {
     public class PricingRule : Entity<Guid>
     {
-        public string ProductName { get; }
-        public Price Price { get; }
-        public int Units { get; }
-
         public PricingRule(Guid id, string productName, int units, Price price) : base(id)
         {
             if (units < 1) { throw new ArgumentOutOfRangeException(nameof(units)); }
@@ -18,5 +14,9 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
             ProductName = productName;
             Units = units;
         }
+
+        public string ProductName { get; }
+        public Price Price { get; }
+        public int Units { get; }
     }
 }

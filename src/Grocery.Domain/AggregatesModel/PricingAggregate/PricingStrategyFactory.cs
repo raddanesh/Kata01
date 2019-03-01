@@ -19,7 +19,8 @@
 
             if (volumeRule != null)
             {
-                compositePricingStrategy.AddPricingStrategy(new VolumePricingStrategy(volumeRule.Units, volumeRule.Price));
+                compositePricingStrategy.AddPricingStrategy(new VolumePricingStrategy(volumeRule.Units,
+                    volumeRule.Price));
             }
 
             return compositePricingStrategy;

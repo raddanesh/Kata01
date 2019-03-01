@@ -5,8 +5,8 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
 {
     public class VolumePricingStrategy : IPricingStrategy
     {
-        private readonly int _volumeThreshold;
         private readonly Price _volumePrice;
+        private readonly int _volumeThreshold;
 
         public VolumePricingStrategy(int volumeThreshold, Price volumePrice)
         {
@@ -15,6 +15,7 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
 
             _volumeThreshold = volumeThreshold;
         }
+
         public Price GetTotal(OrderItem item)
         {
             var regularPrice = item.GetUnits() * item.GetUnitPrice();
