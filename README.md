@@ -17,7 +17,7 @@ The goal of this kata is to practice a looser style of experimental modelling. L
 Let's have a look at a simple design without any complex pricing logic:
 ![domain](https://user-images.githubusercontent.com/9795243/53691777-a4461f80-3d39-11e9-90b3-01d78f1c21b6.png)
 
-The next step is to design a more complex logic that enables us selecting an algorithm or strategy to calculate total price at runtime. Instead of implementing a single strategy directly, like what we did in the previous approach, code receives runtime instructions as to which in a family of strategies to use.
+The next step is to design a more complex logic that enables us selecting an algorithm or strategy to calculate total price at runtime: <a href='https://en.wikipedia.org/wiki/Strategy_pattern'>Strategy pattern</a>. Instead of implementing a single strategy directly, like what we did in the previous approach, code receives runtime instructions as to which in a family of strategies to use.
 
 Let’s start with a simple strategy that handles volume pricing: a pricing strategy that allows discount for bulk purchases. For example, “apple cost 50 cents, three apples cost $1.30”.
 
@@ -37,9 +37,9 @@ Now take a look at the context object, OrderItem, and its associated interface I
 
 ![orderitem](https://user-images.githubusercontent.com/9795243/53692284-c2178280-3d41-11e9-9dc3-370f262fcce1.png)
 
-There are different pricing algorithms or strategies, and they change over time. Who should create the strategy? A straightforward approach is to apply the Factory pattern again: a PricingStrategyFactory can be responsible for creating all strategies needed by the application. PricingStrategyFactory is also responsible for reading pricing rules from data store, since it is creating the pricing strategy.
+There are different pricing algorithms or strategies, and they change over time. Who should create the strategy? A straightforward approach is to apply <a href='https://en.wikipedia.org/wiki/Factory_method_pattern'>the Factory pattern</a>: a PricingStrategyFactory can be responsible for creating all strategies needed by the application. PricingStrategyFactory is also responsible for reading pricing rules from data store, since it is creating the pricing strategy.
 
-To raise yet another interesting requirements and design problem: How do we handle the case of multiple, conflicting pricing policies? Is there a way to change the design so that the OrderItem object does not know if it is dealing with one or many pricing strategies, and also offer a design for the conflict resolution? Yes, with the Composite pattern.
+To raise yet another interesting requirements and design problem: How do we handle the case of multiple, conflicting pricing policies? Is there a way to change the design so that the OrderItem object does not know if it is dealing with one or many pricing strategies, and also offer a design for the conflict resolution? Yes, with the <a href='https://en.wikipedia.org/wiki/Composite_pattern'>Composite pattern</a>.
 
 For example, a new class called CompositeLowestPricingStrategy can implement the IPricingStrategy and itself contain other IPricingStrategy objects. This is a signature feature of a composite object: The outer composite object contains a list of inner objects, and both the outer and inner objects implement the same interface. That is, the composite class itself implements the IPricingStrategy interface.
 
