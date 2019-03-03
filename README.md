@@ -12,3 +12,27 @@ This kata involves no coding. The exercise is to experiment with various models 
 
 # Goal
 The goal of this kata is to practice a looser style of experimental modelling. Look for as many different ways of handling the issues as possible. Consider the various tradeoffs of each. What techniques are best for exploring these models? For recording them? How can you validate a model is reasonable?
+
+### Design overview 
+Let's have a look at a simple design without any complex pricing logic:
+![domain](https://user-images.githubusercontent.com/9795243/53691777-a4461f80-3d39-11e9-90b3-01d78f1c21b6.png)
+
+The next step is to design a more complex logic that enables us selecting an algorithm or strategy to calculate total price at runtime. Instead of implementing a single strategy directly, like what we did in the previous approach, code receives runtime instructions as to which in a family of strategies to use.
+
+Let’s start with a simple strategy that handles volume pricing: a pricing strategy that allows discount for bulk purchases. For example, “apple cost 50 cents, three apples cost $1.30”.
+
+As the behavior of pricing varies based on different strategies, we create two PricingStrategy classes to calculate the total price based on two strategies: regular and volume.
+
+![strategy](https://user-images.githubusercontent.com/9795243/53692109-0bb29e00-3d3f-11e9-864f-249443371866.png)
+
+Observe that PricingStrategy classes implement IPricingStrategy interface with a polymorphic GetTotal method. In this method, we pass OrderItem object as a parameter, so that strategy object can calculate regular price (pre-discount) and volume discount based on the number of items.
+
+Let's have a look at sequence diagram:
+
+![collaboration](https://user-images.githubusercontent.com/9795243/53692193-3a7d4400-3d40-11e9-896c-207e23be48cf.png)
+
+The UML sequence diagram shows the runtime interaction: The context is OrderItem that delegates price calculation to a strategy object.
+
+Now take a look at the context object, OrderItem, and its associated interface IPricingStrategy, not a concrete class:
+
+![orderitem](https://user-images.githubusercontent.com/9795243/53692284-c2178280-3d41-11e9-9dc3-370f262fcce1.png)
