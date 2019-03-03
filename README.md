@@ -37,7 +37,7 @@ Now take a look at the context object, OrderItem, and its associated interface I
 
 ![orderitem](https://user-images.githubusercontent.com/9795243/53692284-c2178280-3d41-11e9-9dc3-370f262fcce1.png)
 
-There are different pricing algorithms or strategies, and they change over time. Who should create the strategy? A straightforward approach is to apply <a href='https://en.wikipedia.org/wiki/Factory_method_pattern'>the Factory pattern</a>: a PricingStrategyFactory can be responsible for creating all strategies needed by the application. PricingStrategyFactory is also responsible for reading pricing rules from data store, since it is creating the pricing strategy.
+There are different pricing algorithms or strategies, and they change over time. Who should create the strategy? A straightforward approach is to apply <a href='https://en.wikipedia.org/wiki/Factory_method_pattern'>Factory pattern</a>: a PricingStrategyFactory can be responsible for creating all strategies needed by the application. PricingStrategyFactory is also responsible for reading pricing rules from data store, since it is creating the pricing strategy.
 
 To raise yet another interesting requirements and design problem: How do we handle the case of multiple, conflicting pricing policies? Is there a way to change the design so that the OrderItem object does not know if it is dealing with one or many pricing strategies, and also offer a design for the conflict resolution? Yes, with the <a href='https://en.wikipedia.org/wiki/Composite_pattern'>Composite pattern</a>.
 
