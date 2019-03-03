@@ -25,7 +25,7 @@ As the behavior of pricing varies based on different strategies, we create two P
 
 ![strategy](https://user-images.githubusercontent.com/9795243/53692109-0bb29e00-3d3f-11e9-864f-249443371866.png)
 
-Observe that PricingStrategy classes implement IPricingStrategy interface with a polymorphic GetTotal method. In this method, we pass OrderItem object as a parameter, so that strategy object can calculate regular price (pre-discount) and volume discount based on the number of items.
+Observe that PricingStrategy classes implement <i>IPricingStrategy</i> interface with a polymorphic GetTotal method. In this method, we pass OrderItem object as a parameter, so that strategy object can calculate regular price (pre-discount) and volume discount based on the number of items.
 
 Let's have a look at sequence diagram:
 
@@ -33,7 +33,7 @@ Let's have a look at sequence diagram:
 
 The UML sequence diagram shows the runtime interaction: The context is OrderItem that delegates price calculation to a strategy object.
 
-Now take a look at the context object, OrderItem, and its associated interface IPricingStrategy, not a concrete class:
+Now take a look at the context object, OrderItem, and its associated interface <i>IPricingStrategy</i> (not a concrete class):
 
 ![orderitem](https://user-images.githubusercontent.com/9795243/53692284-c2178280-3d41-11e9-9dc3-370f262fcce1.png)
 
@@ -41,7 +41,7 @@ There are different pricing algorithms or strategies, and they change over time.
 
 To raise yet another interesting requirements and design problem: How do we handle the case of multiple, conflicting pricing policies? Is there a way to change the design so that the OrderItem object does not know if it is dealing with one or many pricing strategies, and also offer a design for the conflict resolution? Yes, with the <a href='https://en.wikipedia.org/wiki/Composite_pattern'>Composite pattern</a>.
 
-For example, a new class called CompositeLowestPricingStrategy can implement the IPricingStrategy and itself contain other IPricingStrategy objects. This is a signature feature of a composite object: The outer composite object contains a list of inner objects, and both the outer and inner objects implement the same interface. That is, the composite class itself implements the IPricingStrategy interface.
+For example, a new class called CompositeLowestPricingStrategy can implement the <i>IPricingStrategy</i> and itself contain other PricingStrategy objects. This is a signature feature of a composite object: The outer composite object contains a list of inner objects, and both the outer and inner objects implement the same interface. That is, the composite class itself implements the <i>IPricingStrategy</i> interface.
 
 ![composite](https://user-images.githubusercontent.com/9795243/53698455-ccfa0380-3d91-11e9-9e49-29a43fc9630e.png)
 
