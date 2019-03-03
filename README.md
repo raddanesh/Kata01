@@ -14,7 +14,7 @@ This kata involves no coding. The exercise is to experiment with various models 
 The goal of this kata is to practice a looser style of experimental modelling. Look for as many different ways of handling the issues as possible. Consider the various tradeoffs of each. What techniques are best for exploring these models? For recording them? How can you validate a model is reasonable?
 
 ### Design overview 
-Let's have a look at a simple design without any complex pricing logic:
+Let's start with a simple design without any complex pricing logic:
 ![domain](https://user-images.githubusercontent.com/9795243/53691777-a4461f80-3d39-11e9-90b3-01d78f1c21b6.png)
 
 The next step is to design a more complex logic that enables us selecting an algorithm or strategy to calculate total price at runtime: <a href='https://en.wikipedia.org/wiki/Strategy_pattern'>Strategy pattern</a>. Instead of implementing a single strategy directly, like what we did in the previous approach, code receives runtime instructions as to which in a family of strategies to use.
