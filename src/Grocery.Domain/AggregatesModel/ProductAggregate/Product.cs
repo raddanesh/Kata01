@@ -20,14 +20,5 @@ namespace Grocery.Domain.AggregatesModel.ProductAggregate
             Name = name;
             UnitPrice = unitPrice;
         }
-
-        /// <summary>
-        /// Sets the unit price of the product
-        /// </summary>
-        /// <param name="unitPrice"></param>
-        public void SetUnitPrice(Price unitPrice)
-        {
-            UnitPrice = unitPrice;
-        }
     }
 }

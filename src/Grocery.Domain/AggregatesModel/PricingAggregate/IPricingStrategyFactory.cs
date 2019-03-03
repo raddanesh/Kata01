@@ -1,7 +1,9 @@
-﻿namespace Grocery.Domain.AggregatesModel.PricingAggregate
+﻿using System;
+
+namespace Grocery.Domain.AggregatesModel.PricingAggregate
 {
     public interface IPricingStrategyFactory
     {
-        IPricingStrategy Create(string productName);
+        IPricingStrategy Create(Guid productId);
     }
 }

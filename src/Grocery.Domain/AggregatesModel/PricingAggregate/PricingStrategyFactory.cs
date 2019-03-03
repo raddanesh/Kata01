@@ -1,29 +1,27 @@
-﻿namespace Grocery.Domain.AggregatesModel.PricingAggregate
+﻿using System;
+
+namespace Grocery.Domain.AggregatesModel.PricingAggregate
 {
     public class PricingStrategyFactory : IPricingStrategyFactory
     {
-        private readonly IPricingRulesRepository _pricingRulesRepository;
+        private readonly IVolumePricingRulesRepository _volumePricingRulesRepository;
 
-        public PricingStrategyFactory(IPricingRulesRepository pricingRulesRepository)
+        public PricingStrategyFactory(IVolumePricingRulesRepository volumePricingRulesRepository)
         {
-            _pricingRulesRepository = pricingRulesRepository;
+            _volumePricingRulesRepository = volumePricingRulesRepository;
         }
 
-        public IPricingStrategy Create(string productName)
+        public IPricingStrategy Create(Guid productId)
         {
-            var compositePricingStrategy = new CompositeLowestPricingStrategy();
-
-            compositePricingStrategy.AddPricingStrategy(new RegularPricingStrategy());
-
-            var volumeRule = _pricingRulesRepository.GetByProductName(productName);
+            var volumeRule = _volumePricingRulesRepository.GetByProductId(productId);
 
             if (volumeRule != null)
             {
-                compositePricingStrategy.AddPricingStrategy(new VolumePricingStrategy(volumeRule.Units,
-                    volumeRule.Price));
+                return new VolumePricingStrategy(volumeRule.Units,
+                    volumeRule.Price);
             }
 
-            return compositePricingStrategy;
+            return new RegularPricingStrategy();
         }
     }
 }

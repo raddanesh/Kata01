@@ -10,11 +10,10 @@ namespace Grocery.Domain.AggregatesModel.OrderAggregate
 
         private readonly IPricingStrategy _pricingStrategy;
 
-        private readonly string _productName;
         private readonly Price _unitPrice;
         private int _units;
 
-        public OrderItem(Guid id, Guid productId, string productName, Price unitPrice, IPricingStrategy pricingStrategy, int units = 1) : base(id)
+        public OrderItem(Guid id, Guid productId, Price unitPrice, IPricingStrategy pricingStrategy, int units = 1) : base(id)
         {
             if (units < 1) { throw new ArgumentOutOfRangeException(nameof(units)); }
             if (unitPrice == null) { throw new ArgumentNullException(nameof(unitPrice)); }
@@ -24,7 +23,6 @@ namespace Grocery.Domain.AggregatesModel.OrderAggregate
 
             ProductId = productId;
 
-            _productName = productName;
             _unitPrice = unitPrice;
             _units = units;
         }

@@ -7,6 +7,7 @@ namespace Grocery.Domain.AggregatesModel
         /// <summary>
         /// Creates a new <see cref="Price"/> instance.
         /// </summary>
+        /// <param name="value"></param>
         public Price(decimal value) : base(value)
         {
         }

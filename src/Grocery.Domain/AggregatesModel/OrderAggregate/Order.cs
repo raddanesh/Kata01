@@ -43,8 +43,8 @@ namespace Grocery.Domain.AggregatesModel.OrderAggregate
             }
             else
             {
-                var pricingStrategy = _pricingStrategyFactory.Create(product.Name);
-                var orderItem = new OrderItem(Guid.NewGuid(), product.Id, product.Name, product.UnitPrice, pricingStrategy, units);
+                var pricingStrategy = _pricingStrategyFactory.Create(product.Id);
+                var orderItem = new OrderItem(Guid.NewGuid(), product.Id, product.UnitPrice, pricingStrategy, units);
 
                 _orderItems.Add(orderItem);
             }
@@ -57,7 +57,14 @@ namespace Grocery.Domain.AggregatesModel.OrderAggregate
         /// <returns>A <see cref="Price"/> object</returns>
         public Price GetTotalPrice()
         {
-            return _orderItems.Sum(o => o.GetTotalPrice().Value);
+            Price totalPrice = 0;
+
+            foreach (var orderItem in _orderItems)
+            {
+                totalPrice = totalPrice + orderItem.GetTotalPrice();
+            }
+
+            return totalPrice;
         }
     }
 }

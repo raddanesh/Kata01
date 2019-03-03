@@ -15,13 +15,13 @@ namespace Grocery.Tests
 {
     public class OrderAggregateTest
     {
-        private readonly IPricingRulesRepository _pricingRulesRepository;
+        private readonly IVolumePricingRulesRepository _pricingRulesRepository;
         private readonly IPricingStrategyFactory _pricingStrategyFactory;
         private readonly IPricingStrategy _pricingStrategy;
 
         public OrderAggregateTest()
         {
-            _pricingRulesRepository = Substitute.For<IPricingRulesRepository>();
+            _pricingRulesRepository = Substitute.For<IVolumePricingRulesRepository>();
             _pricingStrategy = Substitute.For<IPricingStrategy>();
             _pricingStrategyFactory = new PricingStrategyFactory(_pricingRulesRepository);
         }
@@ -32,9 +32,9 @@ namespace Grocery.Tests
         {
             //Arrange
             var C = new Product(Guid.NewGuid(), "C", 1.00m);
-            var pricingRuleForC = new PricingRule(Guid.NewGuid(), C.Name, 6, 5.00m);
+            var pricingRuleForC = new VolumePricingRule(Guid.NewGuid(), C.Id, 6, 5.00m);
 
-            _pricingRulesRepository.GetByProductName(C.Name).Returns(pricingRuleForC);
+            _pricingRulesRepository.GetByProductId(C.Id).Returns(pricingRuleForC);
 
             var order = new Order(Guid.NewGuid(), _pricingStrategyFactory);
 
@@ -55,12 +55,12 @@ namespace Grocery.Tests
         {
             //Arrange
             var A = new Product(Guid.NewGuid(), "A", 1.25m);
-            var pricingRuleForA = new PricingRule(Guid.NewGuid(), A.Name, 3, 3.00m);
-            _pricingRulesRepository.GetByProductName(A.Name).Returns(pricingRuleForA);
+            var pricingRuleForA = new VolumePricingRule(Guid.NewGuid(), A.Id, 3, 3.00m);
+            _pricingRulesRepository.GetByProductId(A.Id).Returns(pricingRuleForA);
 
             var C = new Product(Guid.NewGuid(), "C", 1.00m);
-            var pricingRuleForC = new PricingRule(Guid.NewGuid(), C.Name, 6, 5.00m);
-            _pricingRulesRepository.GetByProductName(C.Name).Returns(pricingRuleForC);
+            var pricingRuleForC = new VolumePricingRule(Guid.NewGuid(), C.Id, 6, 5.00m);
+            _pricingRulesRepository.GetByProductId(C.Id).Returns(pricingRuleForC);
 
             var order = new Order(Guid.NewGuid(), _pricingStrategyFactory);
 
@@ -82,8 +82,8 @@ namespace Grocery.Tests
         {
             //Arrange
             var C = new Product(Guid.NewGuid(), "C", 1.00m);
-            var pricingRuleForC = new PricingRule(Guid.NewGuid(), C.Name, 6, 5.00m);
-            _pricingRulesRepository.GetByProductName(C.Name).Returns(pricingRuleForC);
+            var pricingRuleForC = new VolumePricingRule(Guid.NewGuid(), C.Id, 6, 5.00m);
+            _pricingRulesRepository.GetByProductId(C.Id).Returns(pricingRuleForC);
 
             var order = new Order(Guid.NewGuid(), _pricingStrategyFactory);
 
@@ -104,18 +104,18 @@ namespace Grocery.Tests
         {
             //Arrange
             var A = new Product(Guid.NewGuid(), "A", 1.25m);
-            var pricingRuleForA = new PricingRule(Guid.NewGuid(), A.Name, 3, 3.00m);
-            _pricingRulesRepository.GetByProductName(A.Name).Returns(pricingRuleForA);
+            var pricingRuleForA = new VolumePricingRule(Guid.NewGuid(), A.Id, 3, 3.00m);
+            _pricingRulesRepository.GetByProductId(A.Id).Returns(pricingRuleForA);
 
             var B = new Product(Guid.NewGuid(), "B", 4.25m);
-            _pricingRulesRepository.GetByProductName(B.Name).Returns(r => null);
+            _pricingRulesRepository.GetByProductId(B.Id).Returns(r => null);
 
             var C = new Product(Guid.NewGuid(), "C", 1.00m);
-            var pricingRuleForC = new PricingRule(Guid.NewGuid(), C.Name, 6, 5.00m);
-            _pricingRulesRepository.GetByProductName(C.Name).Returns(pricingRuleForC);
+            var pricingRuleForC = new VolumePricingRule(Guid.NewGuid(), C.Id, 6, 5.00m);
+            _pricingRulesRepository.GetByProductId(C.Id).Returns(pricingRuleForC);
 
             var D = new Product(Guid.NewGuid(), "D", 0.75m);
-            _pricingRulesRepository.GetByProductName(D.Name).Returns(r => null);
+            _pricingRulesRepository.GetByProductId(D.Id).Returns(r => null);
 
             var order = new Order(Guid.NewGuid(), _pricingStrategyFactory);
             
@@ -143,18 +143,18 @@ namespace Grocery.Tests
         {
             //Arrange
             var A = new Product(Guid.NewGuid(), "A", 1.25m);
-            var pricingRuleForA = new PricingRule(Guid.NewGuid(), A.Name, 3, 3.00m);
-            _pricingRulesRepository.GetByProductName(A.Name).Returns(pricingRuleForA);
+            var pricingRuleForA = new VolumePricingRule(Guid.NewGuid(), A.Id, 3, 3.00m);
+            _pricingRulesRepository.GetByProductId(A.Id).Returns(pricingRuleForA);
 
             var B = new Product(Guid.NewGuid(), "B", 4.25m);
-            _pricingRulesRepository.GetByProductName(B.Name).Returns(r => null);
+            _pricingRulesRepository.GetByProductId(B.Id).Returns(r => null);
 
             var C = new Product(Guid.NewGuid(), "C", 1.00m);
-            var pricingRuleForC = new PricingRule(Guid.NewGuid(), C.Name, 6, 5.00m);
-            _pricingRulesRepository.GetByProductName(C.Name).Returns(pricingRuleForC);
+            var pricingRuleForC = new VolumePricingRule(Guid.NewGuid(), C.Id, 6, 5.00m);
+            _pricingRulesRepository.GetByProductId(C.Id).Returns(pricingRuleForC);
 
             var D = new Product(Guid.NewGuid(), "D", 0.75m);
-            _pricingRulesRepository.GetByProductName(D.Name).Returns(r => null);
+            _pricingRulesRepository.GetByProductId(D.Id).Returns(r => null);
 
             var order = new Order(Guid.NewGuid(), _pricingStrategyFactory);
 
@@ -178,8 +178,8 @@ namespace Grocery.Tests
         {
             //Arrange
             var C = new Product(Guid.NewGuid(), "C", 1.00m);
-            var pricingRuleForC = new PricingRule(Guid.NewGuid(), C.Name, 6, 5.00m);
-            _pricingRulesRepository.GetByProductName(C.Name).Returns(pricingRuleForC);
+            var pricingRuleForC = new VolumePricingRule(Guid.NewGuid(), C.Id, 6, 5.00m);
+            _pricingRulesRepository.GetByProductId(C.Id).Returns(pricingRuleForC);
 
             var order = new Order(Guid.NewGuid(), _pricingStrategyFactory);
 
@@ -206,7 +206,7 @@ namespace Grocery.Tests
 
 
             //Act - Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => new OrderItem(Guid.NewGuid(), productId, productName, unitPrice, _pricingStrategy, units));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new OrderItem(Guid.NewGuid(), productId, unitPrice, _pricingStrategy, units));
         }
 
 
@@ -217,7 +217,7 @@ namespace Grocery.Tests
             var productId = Guid.NewGuid();
             var productName = "A";
             const int unitPrice = 12;
-            var fakeOrderItem = new OrderItem(Guid.NewGuid(), productId, productName, unitPrice, _pricingStrategy);
+            var fakeOrderItem = new OrderItem(Guid.NewGuid(), productId, unitPrice, _pricingStrategy);
 
 
             //Assert
@@ -232,7 +232,7 @@ namespace Grocery.Tests
             var productId = Guid.NewGuid();
             var productName = "A";
             const int unitPrice = 12;
-            var fakeOrderItem = new OrderItem(Guid.NewGuid(), productId, productName, unitPrice, _pricingStrategy);
+            var fakeOrderItem = new OrderItem(Guid.NewGuid(), productId, unitPrice, _pricingStrategy);
 
 
             //Act
