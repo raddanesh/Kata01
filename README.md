@@ -45,4 +45,15 @@ For example, a new class called CompositeLowestPricingStrategy can implement the
 
 ![composite](https://user-images.githubusercontent.com/9795243/53698455-ccfa0380-3d91-11e9-9e49-29a43fc9630e.png)
 
+### Refactoring
+
+One issue I see with passing the Context object to strategy is that Strategy and Context classes may be tightly coupled, and less testable. The Context must supply the relevant data to the Strategy for implementing the algorithm and sometimes, all the data passed by the Context may not be relevant to all the Concrete Strategies.
+
+One approach would be to not pass the reference (this) of Context class in strategy class but to pass only the needed data:
+
+Public GetTotal(int units, Price unitPrice);
+
+However, this seems to be a violation of Open-closed principle, as we may need to extend this method in the future to get more data from context.
+
+A better approach would be to make our strategy classes dependent (or use) an interface that the context class would implement. This would mean adding getters (as necessary) in the Context class for strategy classes to get the data they need.
 
