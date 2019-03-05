@@ -4,6 +4,6 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
 {
     public interface IPricingStrategy
     {
-        Price GetTotal(OrderItem item);
+        Price GetTotal(IOrderItemContext item);
     }
 }

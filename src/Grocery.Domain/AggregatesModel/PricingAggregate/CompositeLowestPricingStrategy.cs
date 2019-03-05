@@ -4,7 +4,7 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
 {
     public class CompositeLowestPricingStrategy : CompositePricingStrategy
     {
-        public override Price GetTotal(OrderItem item)
+        public override Price GetTotal(IOrderItemContext item)
         {
             Price lowestPrice = decimal.MaxValue;
 

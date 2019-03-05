@@ -12,7 +12,7 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
             PricingStrategies = new List<IPricingStrategy>();
         }
 
-        public abstract Price GetTotal(OrderItem item);
+        public abstract Price GetTotal(IOrderItemContext item);
 
         public void AddPricingStrategy(IPricingStrategy pricingStrategy)
         {

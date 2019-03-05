@@ -4,7 +4,7 @@ using Grocery.Domain.SeedWork;
 
 namespace Grocery.Domain.AggregatesModel.OrderAggregate
 {
-    public class OrderItem : Entity<Guid>
+    public class OrderItem : Entity<Guid>, IOrderItemContext
     {
         public Guid ProductId { get; }
 

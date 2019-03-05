@@ -16,7 +16,7 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
             _volumeThreshold = volumeThreshold;
         }
 
-        public Price GetTotal(OrderItem item)
+        public Price GetTotal(IOrderItemContext item)
         {
             var regularPrice = item.GetUnits() * item.GetUnitPrice();
             Price volumeDiscount = 0;
