@@ -66,3 +66,28 @@ public interface IOrderItemContext
     Price GetUnitPrice();
 }
 ```
+
+One more issue I see is duplicate logic in VolumePricingStrategy:
+
+```
+var regularPrice = item.GetUnits() * item.GetUnitPrice();
+```
+
+We need regular price in some pricing strategies as some threshold may limit us from applying any discount.
+
+By making the GetTotal method in RegularPricingStrategy virtual, and inheriting VolumePricingStrategy from RegularPricingStrategy, we can remove duplicate code:
+
+```
+public override Price GetTotal(IOrderItemContext item)
+{
+    var regularPrice = base.GetTotal(item);
+    Price volumeDiscount = 0;
+
+    if (item.GetUnits() >= _volumeThreshold)
+    {
+        volumeDiscount = _volumeThreshold * item.GetUnitPrice() - _volumePrice;
+    }
+
+    return regularPrice - volumeDiscount;
+}
+```
