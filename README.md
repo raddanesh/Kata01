@@ -57,3 +57,8 @@ However, this seems to be a violation of Open-closed principle, as we may need t
 
 A better approach would be to make our strategy classes dependent (or use) an interface that the context class would implement. This would mean adding getters (as necessary) in the Context class for strategy classes to get the data they need.
 
+public interface IOrderItemContext
+{
+    int GetUnits();
+    Price GetUnitPrice();
+}
