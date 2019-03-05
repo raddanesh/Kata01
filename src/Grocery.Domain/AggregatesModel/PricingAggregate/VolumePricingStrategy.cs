@@ -3,7 +3,7 @@ using Grocery.Domain.AggregatesModel.OrderAggregate;
 
 namespace Grocery.Domain.AggregatesModel.PricingAggregate
 {
-    public class VolumePricingStrategy : IPricingStrategy
+    public class VolumePricingStrategy : RegularPricingStrategy
     {
         private readonly Price _volumePrice;
         private readonly int _volumeThreshold;
@@ -16,9 +16,9 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
             _volumeThreshold = volumeThreshold;
         }
 
-        public Price GetTotal(IOrderItemContext item)
+        public override Price GetTotal(IOrderItemContext item)
         {
-            var regularPrice = item.GetUnits() * item.GetUnitPrice();
+            var regularPrice = base.GetTotal(item);
             Price volumeDiscount = 0;
 
             if (item.GetUnits() >= _volumeThreshold)

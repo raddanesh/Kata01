@@ -4,7 +4,7 @@ namespace Grocery.Domain.AggregatesModel.PricingAggregate
 {
     public class RegularPricingStrategy : IPricingStrategy
     {
-        public Price GetTotal(IOrderItemContext item)
+        public virtual Price GetTotal(IOrderItemContext item)
         {
             return item.GetUnits() * item.GetUnitPrice();
         }
