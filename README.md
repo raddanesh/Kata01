@@ -92,4 +92,4 @@ public override Price GetTotal(IOrderItemContext item)
 }
 ```
 
-![final](https://user-images.githubusercontent.com/9795243/53848260-798dde00-3f68-11e9-84e0-fda4d36d02bb.png)
+![final](https://user-images.githubusercontent.com/9795243/53848419-1badc600-3f69-11e9-8f68-87cb9cfd42bd.png)
