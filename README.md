@@ -91,3 +91,5 @@ public override Price GetTotal(IOrderItemContext item)
     return regularPrice - volumeDiscount;
 }
 ```
+
+![final](https://user-images.githubusercontent.com/9795243/53848260-798dde00-3f68-11e9-84e0-fda4d36d02bb.png)
