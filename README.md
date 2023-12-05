@@ -19,7 +19,7 @@ Let's start with a simple design without any complex pricing logic:
 
 The next step is to design a more complex logic that enables us selecting an algorithm or strategy to calculate total price at runtime: <a href='https://en.wikipedia.org/wiki/Strategy_pattern'>Strategy pattern</a>. Instead of implementing a single strategy directly, like what we did in the previous approach, code receives runtime instructions as to which in a family of strategies to use.
 
-Consdier a simple strategy that handles <a href='https://en.wikipedia.org/wiki/Bulk_purchasing'>volume pricing</a>: a pricing strategy that allows discount for bulk purchases. For example, “apple cost 50 cents, but if a customer wants three apples, the total cost is $1.30”.
+Consdier a simple strategy that handles <a href='https://en.wikipedia.org/wiki/Bulk_purchasing'>volume pricing</a>: a pricing strategy that allows discount for bulk purchases. For instance, “suppose an apple costs 50 cents, but if a customer opts for three apples, the total cost becomes $1.30”.
 
 As the behavior of pricing varies based on different strategies, we create two PricingStrategy classes to calculate the total price based on two strategies: regular and volume.
 
